@@ -666,7 +666,7 @@ inline void calibrate_all_toolheads(measurements_t &m, const float uncertainty) 
  *   1) For each nozzle, touch top and sides of object to determine object position and
  *      nozzle offsets. Do a fast but rough search over a wider area.
  *   2) With the first nozzle, touch top and sides of object to determine backlash values
- *      for all axis (if BACKLASH_GCODE is enabled)
+ *      for all axes (if BACKLASH_GCODE is enabled)
  *   3) For each nozzle, touch top and sides of object slowly to determine precise
  *      position of object. Adjust coordinate system and nozzle offsets so probed object
  *      location corresponds to known object location with a high degree of precision.
@@ -709,7 +709,7 @@ inline void calibrate_all() {
 void GcodeSuite::G425() {
 
   #ifdef CALIBRATION_SCRIPT_PRE
-    GcodeSuite::process_subcommands_now_P(PSTR(CALIBRATION_SCRIPT_PRE));
+    process_subcommands_now(F(CALIBRATION_SCRIPT_PRE));
   #endif
 
   if (homing_needed_error()) return;
@@ -745,7 +745,7 @@ void GcodeSuite::G425() {
   SET_SOFT_ENDSTOP_LOOSE(false);
 
   #ifdef CALIBRATION_SCRIPT_POST
-    GcodeSuite::process_subcommands_now_P(PSTR(CALIBRATION_SCRIPT_POST));
+    process_subcommands_now(F(CALIBRATION_SCRIPT_POST));
   #endif
 }
 
